@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #0a0014, #12002d 40%, #0a0014 70%),
+              linear-gradient(135deg, #0a0014, #1a0033, #240046, #35006b, #4f00aa, #1b0033);
+  background-size: 600% 600%;
+  animation: gradientShift 8s ease-in-out infinite;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animate gradient */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glowing blur orbs */
+body::before, 
+body::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(160px);
+  opacity: 0.7;
+  animation: floatOrbs 6s ease-in-out infinite alternate;
+}
+
+body::before {
+  top: -100px;
+  left: -100px;
+  background: #6a00ff; /* neon purple */
+  box-shadow: 0 0 250px 120px #6a00ff;
+}
+
+body::after {
+  bottom: -100px;
+  right: -100px;
+  background: #00d4ff; /* neon blue */
+  box-shadow: 0 0 250px 120px #00d4ff;
+}
+
+@keyframes floatOrbs {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(120px, -120px) scale(1.3); }
+  100% { transform: translate(-120px, 120px) scale(1); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(138, 43, 226, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 1);
+}
+
+/* ==================== DECLINE CALL BUTTON ==================== */
+.decline-call-btn {
+  border-radius: 50% !important;
+  width: 65px !important;
+  height: 65px !important;
+  background: linear-gradient(135deg, #ff3b3b, #a00000) !important;
+  border: none !important;
+  box-shadow: 0 0 18px rgba(255, 50, 50, 0.7), 0 0 35px rgba(255, 0, 0, 0.4) !important;
+  transition: all 0.3s ease-in-out !important;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer !important;
+  z-index: 1;
+}
+
+.decline-call-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 10%, transparent 70%);
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.decline-call-btn:hover::before {
+  opacity: 1;
+  top: -20%;
+  left: -20%;
+}
+
+.decline-call-btn:hover {
+  background: linear-gradient(135deg, #ff5555, #800000) !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 80, 80, 0.9), 0 0 45px rgba(255, 0, 0, 0.7) !important;
+}
+
+.decline-call-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==================== ANSWER CALL BUTTON ==================== */
+.answer-call-image {
+  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  width: 75px !important;
+  height: 75px !important;
+  background: linear-gradient(135deg, #9b1fe8, #4a00e0) !important;
+  box-shadow: 0 0 20px rgba(155, 31, 232, 0.8), 0 0 40px rgba(74, 0, 224, 0.6) !important;
+  transition: all 0.3s ease-in-out !important;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.answer-call-image::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 10%, transparent 70%);
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.answer-call-image:hover::before {
+  opacity: 1;
+  top: -20%;
+  left: -20%;
+}
+
+.answer-call-image:hover {
+  background: linear-gradient(135deg, #b44aff, #3500c0) !important;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 0 30px rgba(200, 100, 255, 1), 0 0 55px rgba(155, 31, 232, 0.9) !important;
+}
+
+.answer-call-image:active {
+  transform: scale(0.95);
+}
+
+.answer-call-image img {
+  height: 70px !important;
+  filter: drop-shadow(0 0 8px rgba(200, 150, 255, 0.9)) !important;
+}
+
+/* ==================== CALL MODAL ==================== */
+.call-modal-title {
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  color: #e2d9ff !important;
+  text-shadow: 0 0 6px rgba(155, 31, 232, 0.8) !important;
+}
+
+.call-modal-header {
+  border: none !important;
+  background: rgba(25, 0, 45, 0.9) !important;
+  backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(155, 31, 232, 0.4) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.call-modal-header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, #9b1fe8, #00d4ff, #4a00e0, #9b1fe8);
+  animation: rotateBorder 10s linear infinite;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+.call-modal-header .btn-close {
+  font-size: 14px !important;
+  color: #d1c6ff !important;
+  filter: drop-shadow(0 0 5px rgba(155, 31, 232, 0.6)) !important;
+  transition: all 0.3s ease !important;
+}
+
+.call-modal-header .btn-close:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(200, 150, 255, 1) !important;
+  transform: scale(1.1) !important;
+}
+
+.call-modal-footer {
+  display: flex !important;
+  justify-content: flex-end !important;
+  border: none !important;
+  background: rgba(20, 0, 30, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(155, 31, 232, 0.25) !important;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

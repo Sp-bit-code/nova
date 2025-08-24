@@ -1,0 +1,158 @@
+/* ================= VIDEO CONTAINER ================= */
+.video-container {
+  display: flex !important;
+  justify-content: center !important;
+  width: 95% !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.video-paper {
+  padding: 10px !important;
+  background-color: #0e0e1a !important; /* dark theme */
+  border-radius: 12px !important;
+  box-shadow: 0px 4px 15px 0px #00000099 !important;
+}
+
+.video-name {
+  font-weight: 600 !important;
+  color: #f2e9ff !important;
+}
+
+.video-avatar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.video-main {
+  border-radius: 12px !important;
+  height: 100% !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  cursor: pointer !important;
+}
+
+.video-small {
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  width: 390px !important;
+}
+
+.notification-dot {
+  position: absolute !important;
+  top: 2px !important;
+  right: 2px !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #ff2e63 !important;
+  box-shadow: 0 0 8px #ff2e63 !important;
+}
+
+@media (max-width: 768px) {
+  .video-small {
+    width: 280px !important;
+  }
+}
+
+/* ================= NEON SHINY BUTTONS ================= */
+.video-control-btn,
+.decline-call-btn {
+  position: relative;
+  border-radius: 50% !important;
+  width: 65px !important;
+  height: 65px !important;
+  border: none !important;
+  font-size: 22px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Accept / Action Buttons */
+.video-control-btn {
+  background: linear-gradient(135deg, #9b1fe8, #4a00e0) !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px #9b1fe8, 0 0 30px #4a00e0;
+}
+
+.video-control-btn::before,
+.decline-call-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 10%, transparent 70%);
+  transform: rotate(25deg);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+  z-index: -1;
+}
+
+.video-control-btn:hover::before,
+.decline-call-btn:hover::before {
+  opacity: 1;
+  top: -20%;
+  left: -20%;
+}
+
+.video-control-btn:hover {
+  background: linear-gradient(135deg, #b44aff, #3500c0) !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 20px #9b1fe8, 0 0 40px #4a00e0;
+}
+
+/* Decline / End Call Button */
+.decline-call-btn {
+  background: linear-gradient(135deg, #ff2e63, #cc001f) !important;
+  color: #0d0909 !important;
+  box-shadow: 0 0 15px #ff2e63, 0 0 30px #cc001f;
+}
+
+.decline-call-btn:hover {
+  background: linear-gradient(135deg, #ff4c7a, #b00017) !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 20px #ff2e63, 0 0 40px #cc001f;
+}
+
+/* ================= VIDEO CONTROLS WRAPPER ================= */
+.video-controls {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 15px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+/* ================= AVATAR STYLES ================= */
+.avatar-background {
+  background-color: #9b1fe8 !important;
+  padding-top: 14px !important;
+  position: absolute !important;
+  font-size: 45px !important;
+  color: #2d1212 !important;
+  border-radius: 50% !important;
+}
+
+.avatar-visible {
+  display: block !important;
+}
+
+.avatar-hidden {
+  display: none !important;
+}
+
+.mic-off-icon {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  padding: 10px !important;
+  color: #ff2e63 !important;
+  text-shadow: 0 0 8px #ff2e63 !important;
+}

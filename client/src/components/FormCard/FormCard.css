@@ -1,0 +1,165 @@
+/* .form-section {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-bottom: 15px !important;
+}
+
+.card {
+    border-radius: 10px !important;
+    padding: 24px !important;
+    width: 280px !important;
+    box-shadow: 0px 5px 15px 0px #00000026 !important;
+    background-color: #fff!important;
+}
+
+.form-main-btn {
+    border: 1px solid #9B1FE8 !important;
+    background-color: #9B1FE8 !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    font-weight: 500 !important;
+}
+
+.form-main-btn:hover {
+    border: 1px solid #8d00e4 !important;
+    background-color: #8d00e4 !important;
+}
+
+.form-input {
+    border: 1px solid #9B1FE8 !important;
+}
+
+.form-input:focus {
+    outline: none !important;
+    border: 1px solid #9B1FE8 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.form-label {
+    font-size: 16px !important;
+    margin-bottom: 3px !important;
+    font-weight: 500 !important;
+} */
+
+
+.form-section {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-bottom: 15px !important;
+}
+
+/* Neon Glassmorphic card (Dark mode) */
+.card {
+  position: relative;
+  border-radius: 18px !important;
+  padding: 28px !important;
+  width: 320px !important;
+  background: rgba(20, 0, 40, 0.6) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(155, 31, 232, 0.4) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+  color: #d1c4e9 !important;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  background: rgba(40, 0, 80, 0.7) !important;
+  box-shadow: 0 12px 35px rgba(155, 31, 232, 0.5) !important;
+}
+
+/* 🔥 Animated glowing border from first CSS */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, #9b1fe8, #00d4ff, #4a00e0, #9b1fe8);
+  animation: rotateBorder 6s linear infinite;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ✨ Shiny Main Button */
+.form-main-btn {
+  border: none !important;
+  background: linear-gradient(135deg, #9b1fe8, #4a00e0) !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+  font-weight: 600 !important;
+  color: #f8eaff !important;
+  padding: 12px 14px !important;
+  border-radius: 14px !important;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.form-main-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 10%, transparent 70%);
+  transform: rotate(25deg);
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.form-main-btn:hover::before {
+  opacity: 1;
+  top: -20%;
+  left: -20%;
+}
+
+.form-main-btn:hover {
+  background: linear-gradient(135deg, #b44aff, #3500c0) !important;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 20px #9b1fe8, 0 0 40px #4a00e0 !important;
+}
+
+.form-main-btn:active {
+  transform: scale(0.96);
+}
+
+/* Input fields */
+.form-input {
+  border: 1px solid rgba(155, 31, 232, 0.6) !important;
+  background: rgba(25, 0, 50, 0.6) !important;
+  color: #e0cfff !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-input:focus {
+  outline: none !important;
+  border: 1px solid #9b1fe8 !important;
+  box-shadow: 0 0 12px rgba(155, 31, 232, 0.7) !important;
+  -webkit-box-shadow: 0 0 12px rgba(155, 31, 232, 0.7) !important;
+}
+
+/* Labels */
+.form-label {
+  font-size: 15px !important;
+  margin-bottom: 4px !important;
+  font-weight: 500 !important;
+  color: #caa8ff !important;
+}
