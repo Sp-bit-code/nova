@@ -64,15 +64,17 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
-const socketIO = require("socket.io");
-const path = require("path");
+const { Server } = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
 
-const io = socketIO(server, {
+const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "http://localhost:3000",          
+      "https://nova-6.onrender.com"  
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -81,24 +83,17 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-// ✅ Always serve React build if exists
-const clientBuildPath = path.resolve(__dirname, "../client/build");
-app.use(express.static(clientBuildPath));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(clientBuildPath, "index.html"), (err) => {
-    if (err) {
-      res.status(500).send("Error loading frontend");
-    }
-  });
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
 });
 
-// ✅ Socket.io events
 io.on("connection", (socket) => {
-  console.log("🔌 New client connected:", socket.id);
+  console.log(`✅ New client connected: ${socket.id}`);
 
+  // send back the socketId
   socket.emit("socketId", socket.id);
 
+  // handle call initiation
   socket.on("initiateCall", ({ targetId, signalData, senderId, senderName }) => {
     io.to(targetId).emit("incomingCall", {
       signal: signalData,
@@ -107,17 +102,17 @@ io.on("connection", (socket) => {
     });
   });
 
+  // handle media status change
   socket.on("changeMediaStatus", ({ mediaType, isActive }) => {
-    socket.broadcast.emit("mediaStatusChanged", {
-      mediaType,
-      isActive,
-    });
+    socket.broadcast.emit("mediaStatusChanged", { mediaType, isActive });
   });
 
+  // handle chat messages
   socket.on("sendMessage", ({ targetId, message, senderName }) => {
     io.to(targetId).emit("receiveMessage", { message, senderName });
   });
 
+  // handle answering calls
   socket.on("answerCall", (data) => {
     socket.broadcast.emit("mediaStatusChanged", {
       mediaType: data.mediaType,
@@ -126,15 +121,18 @@ io.on("connection", (socket) => {
     io.to(data.to).emit("callAnswered", data);
   });
 
+  // handle call termination
   socket.on("terminateCall", ({ targetId }) => {
     io.to(targetId).emit("callTerminated");
   });
 
+  // handle disconnects
   socket.on("disconnect", () => {
-    console.log("❌ Client disconnected:", socket.id);
+    console.log(`❌ Client disconnected: ${socket.id}`);
   });
 });
 
-server.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
-);
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
+
