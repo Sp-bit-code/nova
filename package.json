@@ -4,11 +4,13 @@
   "description": "Video call app with React and Express",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "server": "nodemon server/index.js",
-    "client": "cd client && npm start",
-    "client:build": "cd client && npm install && npm run build",
-    "heroku-postbuild": "npm run client:build" 
+    "start": "node server/index.js",             // ✅ Start backend
+    "server": "nodemon server/index.js",         // Dev: backend only
+    "client": "cd client && npm start",          // Dev: frontend only
+    "client:install": "cd client && npm install",
+    "client:build": "cd client && npm run build",
+    "build": "npm run client:install && npm run client:build",  // ✅ Build frontend before deploy
+    "dev": "concurrently \"npm run server\" \"npm run client\"" // Dev: run both
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "concurrently": "^8.2.0"
   }
 }
