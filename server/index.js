@@ -81,19 +81,17 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-// ✅ Serve React build only in production
-if (process.env.NODE_ENV === "production") {
-  const clientBuildPath = path.join(__dirname, "../client/build");
-  app.use(express.static(clientBuildPath));
+// ✅ Always serve React build if exists
+const clientBuildPath = path.resolve(__dirname, "../client/build");
+app.use(express.static(clientBuildPath));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(clientBuildPath, "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(clientBuildPath, "index.html"), (err) => {
+    if (err) {
+      res.status(500).send("Error loading frontend");
+    }
   });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running...");
-  });
-}
+});
 
 // ✅ Socket.io events
 io.on("connection", (socket) => {
