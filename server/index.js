@@ -69,6 +69,7 @@ const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
+
 const io = socketIO(server, {
   cors: {
     origin: "*",
@@ -80,22 +81,23 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-// ✅ Serve React build in production
-const clientBuildPath = path.join(__dirname, "../client/build");
-app.use(express.static(clientBuildPath));
+// ✅ Serve React build only in production
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.join(__dirname, "../client/build");
+  app.use(express.static(clientBuildPath));
 
-app.get("/", (req, res) => {
-  res.send("Server is running");
-});
-
-// Catch-all: send React index.html for frontend routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running...");
+  });
+}
 
 // ✅ Socket.io events
 io.on("connection", (socket) => {
-  console.log("New client connected:", socket.id);
+  console.log("🔌 New client connected:", socket.id);
 
   socket.emit("socketId", socket.id);
 
@@ -131,11 +133,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected:", socket.id);
+    console.log("❌ Client disconnected:", socket.id);
   });
 });
 
 server.listen(PORT, () =>
-  console.log(`🚀 Server is running on port ${PORT}`)
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
-
